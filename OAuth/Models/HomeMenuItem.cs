@@ -7,7 +7,8 @@ namespace OAuth.Models
     public enum MenuItemType
     {
         Browse,
-        About
+        About,
+        Login
     }
     public class HomeMenuItem
     {
