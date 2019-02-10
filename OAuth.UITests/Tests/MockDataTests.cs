@@ -34,7 +34,7 @@ namespace OAuth.UITests
             Assert.IsTrue(app.Query(itemName).Length > 0);
         }
 
-        [Ignore]
+        [Ignore("testing")]
         [Test]
         public void Repl()
         {

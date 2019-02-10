@@ -36,5 +36,18 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>Xamarin.Auth Google OAuth</string>
+			<key>CFBundleURLTypes</key>
+			<string>Viewer</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.954853910072-6osnii3vjd8jqi2v7m6vl94iovghmre3</string>
+			</array>
+		</dict>
+	</array>
 </dict>
 </plist>

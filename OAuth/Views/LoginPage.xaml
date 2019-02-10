@@ -7,7 +7,7 @@
             <Entry Placeholder="Password"></Entry>
             <Button Text="Login" BorderColor="Gray" BorderWidth="1" BorderRadius="5"></Button>
             <Label Text="--- Or ---" HorizontalOptions="CenterAndExpand"></Label>
-            <Button Text="Google" BorderColor="Gray" BorderWidth="1" BorderRadius="5"></Button>
+            <Button Text="Google" BorderColor="Gray" BorderWidth="1" BorderRadius="5" Clicked="GoogleAuth_Clicked"></Button>
             <Button Text="Facebook" BorderColor="Gray" BorderWidth="1" BorderRadius="5" ></Button>
         </StackLayout>
     </ContentPage.Content>
