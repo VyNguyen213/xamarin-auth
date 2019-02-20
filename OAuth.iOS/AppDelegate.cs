@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using OAuth.Models;
 using UIKit;
+using Xamarin.Forms;
 
 namespace OAuth.iOS
 {
@@ -26,6 +27,8 @@ namespace OAuth.iOS
             Xamarin.Calabash.Start();
             global::Xamarin.Forms.Forms.Init();
             global::Xamarin.Auth.Presenters.XamarinIOS.AuthenticationConfiguration.Init();
+            
+            DependencyService.Register<SFAuthenticationSessionBrowser>();
             
             LoadApplication(new App());
 

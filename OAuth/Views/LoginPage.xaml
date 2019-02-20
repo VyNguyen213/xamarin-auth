@@ -5,7 +5,7 @@
             <Label Text="Login Screen" FontAttributes="Bold" Margin="20" HorizontalOptions="CenterAndExpand"></Label>
             <Entry Placeholder="Username"></Entry>
             <Entry Placeholder="Password"></Entry>
-            <Button Text="Login" BorderColor="Gray" BorderWidth="1" BorderRadius="5"></Button>
+            <Button Text="Login" BorderColor="Gray" BorderWidth="1" BorderRadius="5" Clicked="Login_Clicked"></Button>
             <Label Text="--- Or ---" HorizontalOptions="CenterAndExpand"></Label>
             <Button Text="Google" BorderColor="Gray" BorderWidth="1" BorderRadius="5" Clicked="GoogleAuth_Clicked"></Button>
             <Button Text="Facebook" BorderColor="Gray" BorderWidth="1" BorderRadius="5" ></Button>

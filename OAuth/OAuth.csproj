@@ -13,5 +13,6 @@
     <PackageReference Include="Xamarin.Forms" Version="3.5.0.129452" />  
     <PackageReference Include="Xamarin.Auth" Version="1.6.0.4" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="IdentityModel.OidcClient" Version="2.9.0" />
   </ItemGroup>
 </Project>

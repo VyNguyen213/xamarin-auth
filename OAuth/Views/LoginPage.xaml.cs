@@ -6,13 +6,22 @@ using OAuth.Models;
 using OAuth.ViewModels;
 using Xamarin.Auth;
 using Xamarin.Forms;
+using System.Net.Http;
+using IdentityModel.OidcClient;
+using IdentityModel.OidcClient.Browser;
 
 namespace OAuth.Views
 {
     public partial class LoginPage : ContentPage
     {
+    
+        OidcClient client;
+        LoginResult result;
+        
         Account account;
         AccountStore store;
+        
+        Lazy<HttpClient> _apiClient = new Lazy<HttpClient>(()=>new HttpClient()); 
     
         public LoginPage()
         {
@@ -20,6 +29,36 @@ namespace OAuth.Views
 
             BindingContext = new LoginViewModel();
             store = AccountStore.Create();
+        }
+        
+        async void Login_Clicked(object sender, EventArgs e)
+        {
+            var browser = DependencyService.Get<IBrowser>();
+
+            var options = new OidcClientOptions
+            {
+                Authority = "https://demo.identityserver.io",
+                ClientId = "native.hybrid",
+                Scope = "openid profile email api offline_access",
+                RedirectUri = "xamarinformsclients://callback",
+                Browser = browser,
+
+                ResponseMode = OidcClientOptions.AuthorizeResponseMode.Redirect
+            };
+            
+            client = new OidcClient(options);
+            
+            result = await client.LoginAsync(new LoginRequest());
+
+            if (result.IsError)
+            {
+                await DisplayAlert("Access Token", "Login error", "OK");
+                return;
+            }
+            
+            await DisplayAlert("Access Token", result.AccessToken, "OK");
+
+     
         }
 
         void GoogleAuth_Clicked(object sender, EventArgs e)
