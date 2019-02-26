@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using System.Net.Http;
 using IdentityModel.OidcClient;
 using IdentityModel.OidcClient.Browser;
+using OAuth.Services;
 
 namespace OAuth.Views
 {
@@ -132,6 +133,56 @@ namespace OAuth.Views
 
                 await store.SaveAsync(account = e.Account, Constants.AppName);
                 await DisplayAlert("Email address", user.Email, "OK");
+            }
+        }
+
+        void Facebook_Clicked(object sender, System.EventArgs e)
+        {
+            var auth = new OAuth2Authenticator(Constants.FbClientId, "",
+                                            new Uri("https://m.facebook.com/dialog/oauth/"),
+                                            new Uri("https://www.facebook.com/connect/login_success.html"),
+                                            null, false);
+                                            
+            auth.Completed += OnFbAuthCompleted;
+            auth.Error += OnAuthError;
+
+            var presenter = new Xamarin.Auth.Presenters.OAuthLoginPresenter();
+            presenter.Login(auth);
+        }
+
+        async void OnFbAuthCompleted(object sender, AuthenticatorCompletedEventArgs e)
+        {
+            var authenticator = sender as OAuth2Authenticator;
+            if (authenticator != null)
+            {
+                authenticator.Completed -= OnFbAuthCompleted;
+                authenticator.Error -= OnAuthError;
+            }
+
+            User user = null;
+            if (e.IsAuthenticated)
+            {
+                // If the user is authenticated, request their basic user data from Google
+                // FacebookEmailUrl = "https://graph.facebook.com/me?fields=email&access_token={accessToken}"
+
+                var token = e.Account.Properties["access_token"];
+                var param = new Dictionary<string, string>();
+                param.Add("access_token", token);
+                
+                var request = new OAuth2Request("GET", new Uri("https://graph.facebook.com/me?fields=email"), param, e.Account);
+                var response = await request.GetResponseAsync();
+                if (response != null)
+                {
+                    // Deserialize the data and store it in the account store
+                    // The users email address will be used to identify data in SimpleDB
+                    string userJson = await response.GetResponseTextAsync();
+                    var email = JsonConvert.DeserializeObject<FacebookEmail>(userJson);
+                    
+                    await DisplayAlert("OnFbAuthCompleted", email.Email, "OK");
+                }
+
+                
+                
             }
         }
     }

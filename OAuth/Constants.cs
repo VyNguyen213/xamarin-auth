@@ -18,5 +18,10 @@ namespace OAuth
         // Set these to reversed iOS/Android client ids, with :/oauth2redirect appended
         public static string iOSRedirectUrl = "com.googleusercontent.apps.954853910072-6osnii3vjd8jqi2v7m6vl94iovghmre3:/oauth2redirect";
         public static string AndroidRedirectUrl = "<insert Android redirect URL here>:/oauth2redirect";
+        
+        //Facebook
+        public const string FbClientId = "541639966329810";
+        public const string FbScope = "email";
+        
     }
 }
